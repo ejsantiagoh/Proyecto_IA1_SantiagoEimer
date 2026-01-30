@@ -16,12 +16,8 @@ El proyecto está desarrollado sin dependencias de servicios de pago, utilizando
 
 ### Escanea el QR para comenzar
 
-<!-- 
-Pega aquí la imagen del QR de tu bot de Telegram
-Reemplaza la ruta de la imagen con tu archivo QR
--->
 
-![QR Code AgendaBot](./docs/images/bot-qr.png)
+![QR Code AgendaBot](./image.png)
 
 **Nombre del Bot:** `@ProAgenda_bot`  
 **Link directo:** `https://t.me/ProAgenda_bot`
