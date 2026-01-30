@@ -17,7 +17,7 @@ El proyecto está desarrollado sin dependencias de servicios de pago, utilizando
 ### Escanea el QR para comenzar
 
 
-![QR Code AgendaBot](./image.png)
+![QR Code AgendaBot](./image.png)   
 
 **Nombre del Bot:** `@ProAgenda_bot`  
 **Link directo:** `https://t.me/ProAgenda_bot`
