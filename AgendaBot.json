@@ -1,0 +1,2663 @@
+{
+  "name": "AgendaBot",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -4256,
+        -1328
+      ],
+      "id": "dd418270-d361-47df-a53c-85d14cc982bc",
+      "name": "Telegram Trigger",
+      "webhookId": "74cf93a4-f585-4a96-8b85-3e2b629bd66e",
+      "credentials": {
+        "telegramApi": {
+          "id": "owVHb8fG2ichaOEK",
+          "name": "Telegram account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ba05a33e-a730-4cda-8587-501daa43a93c",
+              "name": "user_id",
+              "value": "={{ $json.message.from.id }}",
+              "type": "number"
+            },
+            {
+              "id": "220d840d-630a-484b-b72a-92347e85ed91",
+              "name": "chat_id",
+              "value": "={{ $json.message.chat.id }}",
+              "type": "number"
+            },
+            {
+              "id": "09bccc81-4d72-42c8-8941-22f714b73d2c",
+              "name": "first_name",
+              "value": "={{ $json.message.from.first_name }}",
+              "type": "string"
+            },
+            {
+              "id": "69c557bf-27c6-48ec-b13f-4c726ffe2183",
+              "name": "username",
+              "value": "={{ $json.message.from.username }}",
+              "type": "string"
+            },
+            {
+              "id": "c10cfa8b-3e19-49cf-a818-bb0130f6ae6e",
+              "name": "language_code",
+              "value": "={{ $json.message.from.language_code }}",
+              "type": "string"
+            },
+            {
+              "id": "77ca73e1-6046-4e73-aceb-c7347cdff0f4",
+              "name": "message_text",
+              "value": "={{ $json.message.text }}",
+              "type": "string"
+            },
+            {
+              "id": "d673ddbb-8e20-4505-bb10-aecd13a1036f",
+              "name": "message_id",
+              "value": "={{ $json.message.message_id }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -4064,
+        -1328
+      ],
+      "id": "dea22ce6-6de8-4585-8191-065203362e08",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.pantalla_actual }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "empty",
+                      "singleValue": true
+                    },
+                    "id": "84c8d71a-cb74-4732-9c5e-40712ac2aa57"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "nuevo_usuario"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "ee863c03-de6c-4bba-9fe0-39f5245d34f6",
+                    "leftValue": "={{ $json.pantalla_actual }}",
+                    "rightValue": "menu_principal",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "menu_principal"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "535ddc3e-fac3-4980-ac41-4af7af072481",
+                    "leftValue": "={{ $json.pantalla_actual }}",
+                    "rightValue": "menu_agenda",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "menu_agenda"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "e6c896e9-2195-4785-8c88-85885a6eb153",
+                    "leftValue": "={{ $json.pantalla_actual }}",
+                    "rightValue": "agendar_paso1_fecha",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "agendar_fecha"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "818f3086-f5ff-401e-933a-9b2c0d8dafc5",
+                    "leftValue": "={{ $json.pantalla_actual }}",
+                    "rightValue": "agendar_paso2_hora",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "agendar_hora"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "fa853bce-cc46-4cdb-b71d-957307cd7bb7",
+                    "leftValue": "={{ $json.pantalla_actual }}",
+                    "rightValue": "agendar_paso3_nombre",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "agendar_nombre"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "b3507465-5961-4df1-8050-afa6e63d78db",
+                    "leftValue": "={{ $json.pantalla_actual }}",
+                    "rightValue": "agendar_paso5_canal",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "agendar_canal"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "f422ae8e-a5df-4f6c-9bf2-b2f735c060fe",
+                    "leftValue": "={{ $json.pantalla_actual }}",
+                    "rightValue": "agendar_paso6_confirmar",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "agendar_confirmar"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "aa384253-f35d-42a1-a182-d7724dc4e594",
+                    "leftValue": "={{ $json.pantalla_actual }}",
+                    "rightValue": "menu_tareas",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "menu_tareas"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "b6008649-6369-4d70-a14c-de90cd2e59fd",
+                    "leftValue": "={{ $json.pantalla_actual }}",
+                    "rightValue": "menu_habitos",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "menu_habitos"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "8c08d200-ccfe-4f2e-a479-a863f031984b",
+                    "leftValue": "={{ $json.pantalla_actual }}",
+                    "rightValue": "menu_listas",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "menu_listas"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -3680,
+        -1488
+      ],
+      "id": "c2934a79-694c-4d10-b35f-5a378c13754f",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Edit Fields').item.json.chat_id }}",
+        "text": "=Hola, soy AgendaBot 👋\n\nEstoy aquí para ayudarte a organizar tus citas, tareas y recordatorios  \nde forma sencilla y sin complicaciones.\n\nPuedes escribirme en cualquier momento.\n\nPara avanzar, solo tienes que escribir el número de la opción que quieras usar.\n\nMenú principal:\n0. Ayuda\n1. Agenda (citas)\n2. Tareas\n3. Recordatorios\n4. Hábitos\n5. Listas\n6. Reportes\n7. Configuración\n8. Administrador\n\nTip rápido: escribe solo el número (por ejemplo: 1) y presiona enviar.\n\nSi no sabes por dónde empezar, te recomiendo la opción 1 😉\n\n¿Qué número eliges?",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1824,
+        -2432
+      ],
+      "id": "1e476297-4a18-4748-8e3e-a96938986bbd",
+      "name": "Telegram - Mensaje Bienvenida",
+      "webhookId": "9f242aa9-64a1-4018-b54b-9785ded2508b",
+      "credentials": {
+        "telegramApi": {
+          "id": "owVHb8fG2ichaOEK",
+          "name": "Telegram account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY",
+          "mode": "list",
+          "cachedResultName": "AgendaBot_DB",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "SESSIONS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "telegram_user": "={{ $('Edit Fields').item.json.user_id }}",
+            "pantalla_actual": "menu_principal",
+            "paso_actual": "\"0\"",
+            "datos_parciales": "\"{}\"",
+            "timestamp_ultima_interaccion": "={{ $now.toISO() }}"
+          },
+          "matchingColumns": [
+            "telegram_user"
+          ],
+          "schema": [
+            {
+              "id": "telegram_user",
+              "displayName": "telegram_user",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "pantalla_actual",
+              "displayName": "pantalla_actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "paso_actual",
+              "displayName": "paso_actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "datos_parciales",
+              "displayName": "datos_parciales",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "timestamp_ultima_interaccion",
+              "displayName": "timestamp_ultima_interaccion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -2112,
+        -2448
+      ],
+      "id": "35cc6b6e-d387-42d9-9bac-8b9fc0374e43",
+      "name": "Google Sheets - Crear Sesion",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "TCN74QRrnqoZq4pf",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtener datos del usuario desde el nodo anterior\nconst userId = $input.item.json.user_id;\nconst firstName = $input.item.json.first_name || \"Usuario\";\nconst username = $input.item.json.username || \"\";\n\n// Crear timestamp actual en formato compatible con Google Sheets\nconst now = new Date();\nconst timestamp = now.toISOString().slice(0, 19).replace('T', ' ');\n\n// Preparar objeto para insertar en SESSIONS\nconst sessionData = {\n  telegram_user: String(userId),\n  pantalla_actual: \"menu_principal\",\n  paso_actual: \"0\",\n  datos_parciales: \"\",\n  timestamp_ultima_interaccion: timestamp\n};\n\n// Retornar los datos preparados\nreturn {\n  json: sessionData\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2432,
+        -2448
+      ],
+      "id": "2fd30473-e7fc-4011-8cc0-a000941b275d",
+      "name": "Function - Preparar Sesion Nueva"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtener datos necesarios\nconst userId = $('Edit Fields').item.json.user_id;\n\n// Crear timestamp\nconst now = new Date();\nconst timestamp = now.toISOString().slice(0, 19).replace('T', ' ');\n\n// Preparar objeto para insertar en LOGS\nconst logData = {\n  timestamp: timestamp,\n  telegram_user: String(userId),\n  pantalla: \"nuevo_usuario\",\n  opcion_elegida: \"N/A\",\n  resultado: \"sesion_creada_exitosamente\"\n};\n\nreturn {\n  json: logData\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1600,
+        -2432
+      ],
+      "id": "cddcb46f-0217-44b8-8d38-3f25db9458c8",
+      "name": "Function - Preparar LOG"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY",
+          "mode": "list",
+          "cachedResultName": "AgendaBot_DB",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2130127904,
+          "mode": "list",
+          "cachedResultName": "LOGS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY/edit#gid=2130127904"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "timestamp": "={{ $now.toISO() }}",
+            "telegram_user": "={{ $('Edit Fields').item.json.user_id }}",
+            "pantalla": "\"nuevo_usuario\"",
+            "opcion_elegida": "\"N/A\"",
+            "resultado": "\"sesion_creada_exitosamente\""
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "timestamp",
+              "displayName": "timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "telegram_user",
+              "displayName": "telegram_user",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "pantalla",
+              "displayName": "pantalla",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "opcion_elegida",
+              "displayName": "opcion_elegida",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "resultado",
+              "displayName": "resultado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1328,
+        -2416
+      ],
+      "id": "4ac261ec-7f87-4601-98d9-06e9d51d953c",
+      "name": "Google Sheets - Registrar LOG",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "TCN74QRrnqoZq4pf",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY",
+          "mode": "list",
+          "cachedResultName": "AgendaBot_DB",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "SESSIONS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "telegram_user",
+              "lookupValue": "={{ $json.user_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -3872,
+        -1328
+      ],
+      "id": "ce9f33c6-3817-4dff-8883-5abd24220f38",
+      "name": "Obtener Sesión Actual",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "TCN74QRrnqoZq4pf",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "0",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "b1ef10af-570c-4fb2-93d7-e13d7c3b3b0c"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "opcion_0_ayuda"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "709d9a08-f7ee-4776-8c5a-10ca1770e805",
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "1",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "opcion_1_agenda"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "20a1ac94-51ec-4ad3-8ff7-2e1e4f57a428",
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "2",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "opcion_2_tareas"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "dd398add-93d4-4ac6-ae94-3f9f601127db",
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "3",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "opcion_3_recordatorios"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "23494c3b-4ab3-46ff-970e-c5b96d3acc86",
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "4",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "opcion_4_habitos"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "d9f458db-5ed1-49b4-bd5a-79c2b340b482",
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "5",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "opcion_5_listas"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "ca5b1347-7b23-42cc-837c-06421ec9d320",
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "6",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "opcion_6_reportes"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "d33c087e-3b8e-4106-9787-e57fd5403836",
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "7",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "opcion_7_config"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "42014d87-5bae-46f9-8ecc-d9326b12c0e9",
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "8",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "opcion_8_admin"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -2256,
+        -2240
+      ],
+      "id": "e6260b31-7be9-4854-abe5-6f3e35c73337",
+      "name": "Switch - Opciones Menu Principal"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Edit Fields').item.json.user_id }}",
+        "text": "={{ $json.message }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1280,
+        -2176
+      ],
+      "id": "43be3abd-9664-4067-9246-6448eb3e6599",
+      "name": "Send a text message1",
+      "webhookId": "a3607b63-5077-4bf9-a85e-5b2373263465",
+      "credentials": {
+        "telegramApi": {
+          "id": "owVHb8fG2ichaOEK",
+          "name": "Telegram account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "1",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "cdd63ca5-65bf-4aa3-a6ec-c90d822af08e"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "agendar_nueva_cita"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "762076f5-31ca-4130-b481-465d4cf2a029",
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "2",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "consultar_agenda"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "72ec7b1a-53de-49f4-9e3b-f0ceaef5b5c3",
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "3",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "reprogramar_cita"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "290230ae-60e1-423d-8f0e-937706df8287",
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "4",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "cancelar_cita"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "3fc876a1-56f1-4706-9e76-c976b2782e58",
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "5",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "completar_cita"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "06dd462e-b138-4fd2-9a5c-d06fd405bf80",
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "9",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "volver_menu_principal"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -2176,
+        -1760
+      ],
+      "id": "39ab4af9-609c-4c9d-afc5-3ca7aa3e7263",
+      "name": "Switch - Opciones Menu Agenda"
+    },
+    {
+      "parameters": {
+        "jsCode": "const messageText = $input.item.json.message_text;\nconst userId = $('Edit Fields').item.json.user_id;\n\nconst optionMap = {\n  '1': 'agendar_paso1_fecha',\n  '2': 'consultar_agenda',\n  '3': 'reprogramar_cita',\n  '4': 'cancelar_cita',\n  '5': 'completar_cita',\n  '9': 'menu_principal'\n};\n\nconst messageMap = {\n  '1': 'Empecemos a crear tu cita.\\n\\nPaso 1 de 6\\n¿Cuál es la fecha de la cita?\\n\\nFormato: YYYY-MM-DD\\nEjemplo: 2026-02-20\\n\\n9. Cancelar',\n  \n  '2': 'Consultando tu agenda...\\n\\n(Esta función estará disponible pronto)\\n\\n9. Volver',\n  \n  '3': 'Reprogramar cita...\\n\\n(Esta función estará disponible pronto)\\n\\n9. Volver',\n  \n  '4': 'Cancelar cita...\\n\\n(Esta función estará disponible pronto)\\n\\n9. Volver',\n  \n  '5': 'Marcar como completada...\\n\\n(Esta función estará disponible pronto)\\n\\n9. Volver',\n  \n  '9': '¿En qué te puedo ayudar hoy?\\n\\nMenú principal:\\n0. Ayuda\\n1. Agenda (citas)\\n2. Tareas\\n3. Recordatorios\\n4. Hábitos\\n5. Listas\\n6. Reportes\\n7. Configuración\\n8. Administrador\\n\\nSugerencia: Si quieres empezar rápido, te recomiendo la opción 1 (Agenda).'\n};\n\nconst now = new Date();\nconst timestamp = now.toISOString().slice(0, 19).replace('T', ' ');\n\nreturn {\n  json: {\n    user_id: userId,\n    telegram_user: String(userId),\n    next_screen: optionMap[messageText],\n    message: messageMap[messageText],\n    opcion_elegida: messageText,\n    timestamp: timestamp\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1776,
+        -1760
+      ],
+      "id": "6f336612-0ba8-4622-99c6-5edcd3a7ac0d",
+      "name": "Function Unificado para menu_agenda"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "9",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "d58aaf39-676c-49bc-ac4c-f045989e97e0"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "cancelar"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -2144,
+        -1424
+      ],
+      "id": "38cc144c-7d8c-44e1-bfc2-9a32dce2deb5",
+      "name": "Switch - Cancelar Agendamiento Fecha"
+    },
+    {
+      "parameters": {
+        "jsCode": "const userId = $('Edit Fields').item.json.user_id;\nconst now = new Date();\nconst timestamp = now.toISOString().slice(0, 19).replace('T', ' ');\n\nreturn {\n  json: {\n    user_id: userId,\n    telegram_user: String(userId),\n    next_screen: 'menu_agenda',\n    timestamp: timestamp\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1936,
+        -1520
+      ],
+      "id": "0922ae52-39e0-4ebe-81ec-6180a65e9a5b",
+      "name": "Function - Preparar Cancelación"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY",
+          "mode": "list",
+          "cachedResultName": "AgendaBot_DB",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "SESSIONS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "pantalla_actual": "={{ $json.next_screen }}",
+            "paso_actual": "0",
+            "datos_parciales": "\"\"",
+            "timestamp_ultima_interaccion": "={{ $now.toISO() }}",
+            "telegram_user": "={{ $('Edit Fields').item.json.user_id }}"
+          },
+          "matchingColumns": [
+            "telegram_user"
+          ],
+          "schema": [
+            {
+              "id": "telegram_user",
+              "displayName": "telegram_user",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "pantalla_actual",
+              "displayName": "pantalla_actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "paso_actual",
+              "displayName": "paso_actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "datos_parciales",
+              "displayName": "datos_parciales",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "timestamp_ultima_interaccion",
+              "displayName": "timestamp_ultima_interaccion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1728,
+        -1488
+      ],
+      "id": "ea523f98-ba24-4d52-ab75-eb301f4e5d9b",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "TCN74QRrnqoZq4pf",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Edit Fields').item.json.user_id }}",
+        "text": "=Agendamiento cancelado.  \n\nVolviendo al menú de Agenda...  \n¿Qué deseas hacer?  \n1. Agendar una nueva cita \n2. Consultar tu agenda \n3. Reprogramar una cita \n4. Cancelar una cita \n5. Marcar una cita como completada \n9. Volver al menú principal",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1520,
+        -1568
+      ],
+      "id": "eb0c7907-ff8e-42cf-8309-3e64f1124f85",
+      "name": "Send a text message2",
+      "webhookId": "38cc16e5-08b7-41b7-8965-c499256a54c7",
+      "credentials": {
+        "telegramApi": {
+          "id": "owVHb8fG2ichaOEK",
+          "name": "Telegram account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const messageText = $input.item.json.message_text;\n\n// Validar formato YYYY-MM-DD\nconst dateRegex = /^\\d{4}-\\d{2}-\\d{2}$/;\nif (!dateRegex.test(messageText)) {\n  return {\n    json: {\n      valid: false,\n      error_message: 'Formato de fecha incorrecto.\\n\\nPor favor usa el formato: YYYY-MM-DD\\nEjemplo: 2026-02-20\\n\\n9. Cancelar'\n    }\n  };\n}\n\n// Validar que la fecha sea válida (no sea 2026-13-45, por ejemplo)\nconst inputDate = new Date(messageText + 'T00:00:00');\nif (isNaN(inputDate.getTime())) {\n  return {\n    json: {\n      valid: false,\n      error_message: 'Fecha inválida. Por favor verifica el mes y el día.\\n\\nFormato: YYYY-MM-DD\\n\\n9. Cancelar'\n    }\n  };\n}\n\n// Validar que la fecha no esté en el pasado\nconst today = new Date();\ntoday.setHours(0, 0, 0, 0);\n\nif (inputDate < today) {\n  return {\n    json: {\n      valid: false,\n      error_message: 'La fecha ingresada ya pasó. Por favor ingresa una fecha futura.\\n\\nFormato: YYYY-MM-DD\\n\\n9. Cancelar'\n    }\n  };\n}\n\n// Validar que no sea más de 1 año en el futuro\nconst oneYearFromNow = new Date(today);\noneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 1);\n\nif (inputDate > oneYearFromNow) {\n  return {\n    json: {\n      valid: false,\n      error_message: 'La fecha es demasiado lejana. Por favor elige una fecha dentro del próximo año.\\n\\n9. Cancelar'\n    }\n  };\n}\n\n// Si todo es válido\nreturn {\n  json: {\n    valid: true,\n    fecha: messageText\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1952,
+        -1280
+      ],
+      "id": "4c638fa6-eeb5-412f-9f20-14629d910baa",
+      "name": "Function - Validar Fecha"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "a5f6e04e-4d43-4916-905d-a8522089f07c",
+              "leftValue": "={{ $json.valid }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "boolean",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1744,
+        -1280
+      ],
+      "id": "bb7c589d-7177-4102-ab5a-31278e31dca9",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "jsCode": "const fecha = $input.item.json.fecha;\nconst userId = $('Edit Fields').item.json.user_id;\n\n// Obtener datos_parciales actuales\nconst datosParcialesStr = $('Get row(s) in sheet').item.json.datos_parciales || '{}';\nlet datosParcialesObj;\n\ntry {\n  datosParcialesObj = JSON.parse(datosParcialesStr);\n} catch (e) {\n  datosParcialesObj = {};\n}\n\n// Agregar la fecha\ndatosParcialesObj.fecha = fecha;\n\n// Timestamp\nconst now = new Date();\nconst timestamp = now.toISOString().slice(0, 19).replace('T', ' ');\n\nreturn {\n  json: {\n    user_id: userId,\n    telegram_user: String(userId),\n    next_screen: 'agendar_paso2_hora',\n    datos_parciales: JSON.stringify(datosParcialesObj),\n    timestamp: timestamp\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1456,
+        -1376
+      ],
+      "id": "07923db5-71ee-425e-b419-f177ae99ede4",
+      "name": "Function - Actualizar datos_parciales"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY",
+          "mode": "list",
+          "cachedResultName": "AgendaBot_DB",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "SESSIONS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "paso_actual": "2",
+            "datos_parciales": "={{ $json.datos_parciales }}",
+            "pantalla_actual": "={{ $json.next_screen }}",
+            "telegram_user": "={{ $('Edit Fields').item.json.user_id }}",
+            "timestamp_ultima_interaccion": "={{ $now.toISO() }}"
+          },
+          "matchingColumns": [
+            "telegram_user"
+          ],
+          "schema": [
+            {
+              "id": "telegram_user",
+              "displayName": "telegram_user",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "pantalla_actual",
+              "displayName": "pantalla_actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "paso_actual",
+              "displayName": "paso_actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "datos_parciales",
+              "displayName": "datos_parciales",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "timestamp_ultima_interaccion",
+              "displayName": "timestamp_ultima_interaccion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1248,
+        -1376
+      ],
+      "id": "9897bff2-1d77-43f1-9f75-0d4cef6fa8b0",
+      "name": "Update row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "TCN74QRrnqoZq4pf",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Edit Fields').item.json.user_id }}",
+        "text": "=Paso 2 de 6 \n¿A qué hora será la cita?  \n\nFormato 24 horas (HH:MM) \nEjemplo: 14:30  \n\n9. Cancelar",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1040,
+        -1376
+      ],
+      "id": "1c3a2e38-fb6d-4730-99cf-7c353ba3ecbb",
+      "name": "Send a text message3",
+      "webhookId": "71bee8ab-f77d-4e8a-b1b0-50884e7f8311",
+      "credentials": {
+        "telegramApi": {
+          "id": "owVHb8fG2ichaOEK",
+          "name": "Telegram account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Edit Fields').item.json.user_id }}",
+        "text": "={{ $json.error_message }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1344,
+        -1184
+      ],
+      "id": "c2fa1b41-2311-46c8-8115-80768c47da08",
+      "name": "Send a text message4",
+      "webhookId": "ad0ea58f-901d-4f52-816d-98502984be0b",
+      "credentials": {
+        "telegramApi": {
+          "id": "owVHb8fG2ichaOEK",
+          "name": "Telegram account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "a5f6e04e-4d43-4916-905d-a8522089f07c",
+              "leftValue": "={{ $json.valid }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "boolean",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1776,
+        -800
+      ],
+      "id": "1111de1b-150e-4d09-8042-eafc915cf9bb",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY",
+          "mode": "list",
+          "cachedResultName": "AgendaBot_DB",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "SESSIONS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "paso_actual": "3",
+            "datos_parciales": "={{ $json.datos_parciales }}",
+            "pantalla_actual": "agendar_paso3_nombre",
+            "telegram_user": "={{ $('Edit Fields').item.json.user_id }}",
+            "timestamp_ultima_interaccion": "={{ $now.toISO() }}"
+          },
+          "matchingColumns": [
+            "telegram_user"
+          ],
+          "schema": [
+            {
+              "id": "telegram_user",
+              "displayName": "telegram_user",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "pantalla_actual",
+              "displayName": "pantalla_actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "paso_actual",
+              "displayName": "paso_actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "datos_parciales",
+              "displayName": "datos_parciales",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "timestamp_ultima_interaccion",
+              "displayName": "timestamp_ultima_interaccion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1280,
+        -896
+      ],
+      "id": "e63c459c-b79b-4438-9150-1d8f4872bb45",
+      "name": "Update row in sheet2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "TCN74QRrnqoZq4pf",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Edit Fields').item.json.user_id }}",
+        "text": "={{ $json.error_message }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1568,
+        -704
+      ],
+      "id": "580cb321-7189-451d-8457-3a6179af1a00",
+      "name": "Send a text message6",
+      "webhookId": "ad0ea58f-901d-4f52-816d-98502984be0b",
+      "credentials": {
+        "telegramApi": {
+          "id": "owVHb8fG2ichaOEK",
+          "name": "Telegram account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "9",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "d58aaf39-676c-49bc-ac4c-f045989e97e0"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "cancelar"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -2176,
+        -944
+      ],
+      "id": "d59e434a-5ee9-43cf-8e06-940d3ed8422d",
+      "name": "Switch - Cancelar Agendamiento Hora"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY",
+          "mode": "list",
+          "cachedResultName": "AgendaBot_DB",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "SESSIONS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "pantalla_actual": "={{ $json.next_screen }}",
+            "paso_actual": "0",
+            "datos_parciales": "\"\"",
+            "timestamp_ultima_interaccion": "={{ $now.toISO() }}",
+            "telegram_user": "={{ $('Edit Fields').item.json.user_id }}"
+          },
+          "matchingColumns": [
+            "telegram_user"
+          ],
+          "schema": [
+            {
+              "id": "telegram_user",
+              "displayName": "telegram_user",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "pantalla_actual",
+              "displayName": "pantalla_actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "paso_actual",
+              "displayName": "paso_actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "datos_parciales",
+              "displayName": "datos_parciales",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "timestamp_ultima_interaccion",
+              "displayName": "timestamp_ultima_interaccion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1728,
+        -1024
+      ],
+      "id": "cb110b14-7df9-46f9-a56b-8eedbedb0f60",
+      "name": "Update row in sheet3",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "TCN74QRrnqoZq4pf",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Edit Fields').item.json.user_id }}",
+        "text": "=Agendamiento cancelado.  \n\nVolviendo al menú de Agenda...  \n¿Qué deseas hacer?  \n1. Agendar una nueva cita \n2. Consultar tu agenda \n3. Reprogramar una cita \n4. Cancelar una cita \n5. Marcar una cita como completada \n9. Volver al menú principal",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1536,
+        -1072
+      ],
+      "id": "6bf8f258-ad5b-4431-85dd-2c198dc59774",
+      "name": "Send a text message7",
+      "webhookId": "38cc16e5-08b7-41b7-8965-c499256a54c7",
+      "credentials": {
+        "telegramApi": {
+          "id": "owVHb8fG2ichaOEK",
+          "name": "Telegram account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const userId = $('Edit Fields').item.json.user_id;\nconst now = new Date();\nconst timestamp = now.toISOString().slice(0, 19).replace('T', ' ');\n\nreturn {\n  json: {\n    user_id: userId,\n    telegram_user: String(userId),\n    next_screen: 'menu_agenda',\n    timestamp: timestamp\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1936,
+        -1008
+      ],
+      "id": "56daee36-6c64-41b1-8989-7e00fd9eaa01",
+      "name": "Function - Preparar Cancelación Hora"
+    },
+    {
+      "parameters": {
+        "jsCode": "const messageText = $input.item.json.message_text;\n\n// Validar formato HH:MM (24 horas)\nconst timeRegex = /^([0-1][0-9]|2[0-3]):[0-5][0-9]$/;\nif (!timeRegex.test(messageText)) {\n  return {\n    json: {\n      valid: false,\n      error_message: 'Formato de hora incorrecto.\\n\\nPor favor usa el formato: HH:MM (24 horas)\\nEjemplo: 14:30 o 09:00\\n\\n9. Cancelar'\n    }\n  };\n}\n\n// Validar que la hora esté en horario razonable (06:00 - 22:00)\nconst [hours, minutes] = messageText.split(':').map(Number);\n\nif (hours < 6 || hours > 22) {\n  return {\n    json: {\n      valid: false,\n      error_message: 'Por favor elige una hora entre 06:00 y 22:00.\\n\\n9. Cancelar'\n    }\n  };\n}\n\n// Si todo es válido\nreturn {\n  json: {\n    valid: true,\n    hora: messageText\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1984,
+        -800
+      ],
+      "id": "bfd4a11f-3b42-4797-98b8-8705189c6f68",
+      "name": "Function - Validar Hora"
+    },
+    {
+      "parameters": {
+        "jsCode": "const hora = $input.item.json.hora;\nconst userId = $('Edit Fields').item.json.user_id;\n\n// Obtener datos_parciales actuales\nconst datosParcialesStr = $('Get row(s) in sheet').item.json.datos_parciales;\nlet datosParcialesObj = JSON.parse(datosParcialesStr);\n\n// Agregar la hora\ndatosParcialesObj.hora = hora;\n\nconst now = new Date();\nconst timestamp = now.toISOString().slice(0, 19).replace('T', ' ');\n\nreturn {\n  json: {\n    user_id: userId,\n    telegram_user: String(userId),\n    next_screen: 'agendar_paso3_nombre',\n    datos_parciales: JSON.stringify(datosParcialesObj),\n    timestamp: timestamp\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1488,
+        -896
+      ],
+      "id": "9651b89a-76f8-47c3-b49f-6ab041cb2f58",
+      "name": "Function - Actualizar datos_parciales2"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Edit Fields').item.json.user_id }}",
+        "text": "=Paso 3 de 6\n¿A nombre de quién es la cita?\n\nEscribe el nombre completo.\n\n9. Cancelar",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1072,
+        -896
+      ],
+      "id": "8fbad7d1-e806-494d-80cd-8a3d029f3fc1",
+      "name": "Pedir Nombre",
+      "webhookId": "71bee8ab-f77d-4e8a-b1b0-50884e7f8311",
+      "credentials": {
+        "telegramApi": {
+          "id": "owVHb8fG2ichaOEK",
+          "name": "Telegram account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtener el nombre de la salida del Switch Secundario\n// Esto nos dirá qué opción eligió el usuario\nconst inputNodeName = $input.first().json;\n\n// Extraer el número de la opción del message_text\nconst messageText = $('Edit Fields').item.json.message_text;\nconst userId = $('Edit Fields').item.json.user_id;\n\n// Mapeo de opciones a siguiente pantalla\nconst nextScreenMap = {\n  '0': 'menu_ayuda',\n  '1': 'menu_agenda',\n  '2': 'menu_tareas',\n  '3': 'menu_recordatorios',\n  '4': 'menu_habitos',\n  '5': 'menu_listas',\n  '6': 'menu_reportes',\n  '7': 'menu_configuracion',\n  '8': 'menu_administrador'\n};\n\n// Mapeo de opciones a mensajes\nconst messageMap = {\n  '0': `Aquí tienes información de ayuda:\n\n1. Escribe solo números para elegir opciones\n2. Usa 9 para volver al menú anterior\n3. Puedes cancelar en cualquier momento\n\n¿En qué más te puedo ayudar?\n\n9. Volver al menú principal`,\n\n  '1': `Perfecto, vamos con tu agenda.\n\n¿Qué deseas hacer?\n\n1. Agendar una nueva cita\n2. Consultar tu agenda\n3. Reprogramar una cita\n4. Cancelar una cita\n5. Marcar una cita como completada\n9. Volver al menú principal`,\n\n  '2': `Vamos con tus tareas.\n\n¿Qué deseas hacer?\n\n1. Crear nueva tarea\n2. Ver mis tareas\n3. Marcar tarea como completada\n4. Eliminar tarea\n9. Volver al menú principal`,\n\n  '3': `Vamos con tus recordatorios.\n\n¿Qué deseas hacer?\n\n1. Crear recordatorio\n2. Ver recordatorios\n3. Eliminar recordatorio\n9. Volver al menú principal`,\n\n  '4': `Vamos con tus hábitos.\n\n¿Qué deseas hacer?\n\n1. Crear nuevo hábito\n2. Ver mis hábitos\n3. Registrar cumplimiento\n4. Ver estadísticas\n9. Volver al menú principal`,\n\n  '5': `Vamos con tus listas.\n\n¿Qué deseas hacer?\n\n1. Crear nueva lista\n2. Ver mis listas\n3. Agregar items a lista\n4. Marcar items completados\n9. Volver al menú principal`,\n\n  '6': `Generando tu reporte...\n\nEsta función estará disponible pronto.\n\n9. Volver al menú principal`,\n\n  '7': `Configuración:\n\n1. Cambiar zona horaria\n2. Preferencias de notificaciones\n3. Ver mi información\n9. Volver al menú principal`,\n\n  '8': `Panel de Administrador:\n\n1. Ver todos los usuarios\n2. Ver estadísticas\n3. Exportar datos\n4. Gestionar permisos\n9. Volver al menú principal`\n};\n\n// Timestamp\nconst now = new Date();\nconst timestamp = now.toISOString().slice(0, 19).replace('T', ' ');\n\nreturn {\n  json: {\n    user_id: userId,\n    telegram_user: String(userId),\n    next_screen: nextScreenMap[messageText],\n    message: messageMap[messageText],\n    opcion_elegida: messageText,\n    timestamp: timestamp,\n    pantalla_origen: 'menu_principal'\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1808,
+        -2176
+      ],
+      "id": "23f970a7-544f-4448-8898-5fe4c8bede10",
+      "name": "Function - Menu Principal Unificado"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY",
+          "mode": "list",
+          "cachedResultName": "AgendaBot_DB",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "SESSIONS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "paso_actual": "0",
+            "pantalla_actual": "={{ $json.next_screen }}",
+            "timestamp_ultima_interaccion": "={{ $json.timestamp }}",
+            "telegram_user": "={{ $('Edit Fields').item.json.user_id }}"
+          },
+          "matchingColumns": [
+            "telegram_user"
+          ],
+          "schema": [
+            {
+              "id": "telegram_user",
+              "displayName": "telegram_user",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "pantalla_actual",
+              "displayName": "pantalla_actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "paso_actual",
+              "displayName": "paso_actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "datos_parciales",
+              "displayName": "datos_parciales",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "timestamp_ultima_interaccion",
+              "displayName": "timestamp_ultima_interaccion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1504,
+        -2176
+      ],
+      "id": "27fb81e9-1949-40b3-8b47-6521fddeb34e",
+      "name": "Google Sheets - Actualizar Pantalla Menu Principal",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "TCN74QRrnqoZq4pf",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const userId = $input.item.json.telegram_user;\nconst nextScreen = $input.item.json.next_screen;\nconst opcionElegida = $input.item.json.opcion_elegida;\nconst timestamp = $input.item.json.timestamp;\n\nreturn {\n  json: {\n    timestamp: timestamp,\n    telegram_user: userId,\n    pantalla: \"menu_principal\",\n    opcion_elegida: opcionElegida,\n    resultado: `redirigido_a_${nextScreen}`\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1072,
+        -2176
+      ],
+      "id": "f9beb4e2-70d0-47be-a8c5-1c724b551637",
+      "name": "Function - Preparar LOG Menu Principal"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY",
+          "mode": "list",
+          "cachedResultName": "AgendaBot_DB",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2130127904,
+          "mode": "list",
+          "cachedResultName": "LOGS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY/edit#gid=2130127904"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "timestamp",
+              "displayName": "timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "telegram_user",
+              "displayName": "telegram_user",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "pantalla",
+              "displayName": "pantalla",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "opcion_elegida",
+              "displayName": "opcion_elegida",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "resultado",
+              "displayName": "resultado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -864,
+        -2176
+      ],
+      "id": "ac224082-0e5a-4962-a9ac-a1f42f1bceb3",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "TCN74QRrnqoZq4pf",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Edit Fields').item.json.chat_id }}",
+        "text": "=Ups, esa opción no existe en este menú.  \n\nPor favor escribe uno de los números que ves en pantalla.  \n\nEstás en: Menú principal \nOpciones disponibles: 0 al 8",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1680,
+        -2000
+      ],
+      "id": "81c2ee89-80de-4a21-98b7-fbe6a71706d0",
+      "name": "Telegram - Error Opcion Invalida Menu Principal",
+      "webhookId": "75c446ca-e964-4b94-afa5-d5192ee7e5b7",
+      "credentials": {
+        "telegramApi": {
+          "id": "owVHb8fG2ichaOEK",
+          "name": "Telegram account 3"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Append row in sheet": [
+      {
+        "json": {
+          "name": "First item",
+          "code": 1
+        }
+      },
+      {
+        "json": {
+          "name": "Second item",
+          "code": 2
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Obtener Sesión Actual",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Function - Preparar Sesion Nueva",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch - Opciones Menu Principal",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch - Opciones Menu Agenda",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch - Cancelar Agendamiento Fecha",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch - Cancelar Agendamiento Hora",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram - Mensaje Bienvenida": {
+      "main": [
+        [
+          {
+            "node": "Function - Preparar LOG",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets - Crear Sesion": {
+      "main": [
+        [
+          {
+            "node": "Telegram - Mensaje Bienvenida",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Function - Preparar Sesion Nueva": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets - Crear Sesion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Function - Preparar LOG": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets - Registrar LOG",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener Sesión Actual": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch - Opciones Menu Principal": {
+      "main": [
+        [
+          {
+            "node": "Function - Menu Principal Unificado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Function - Menu Principal Unificado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Function - Menu Principal Unificado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Function - Menu Principal Unificado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Function - Menu Principal Unificado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Function - Menu Principal Unificado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Function - Menu Principal Unificado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Function - Menu Principal Unificado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Function - Menu Principal Unificado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Telegram - Error Opcion Invalida Menu Principal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch - Opciones Menu Agenda": {
+      "main": [
+        [
+          {
+            "node": "Function Unificado para menu_agenda",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Function Unificado para menu_agenda",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Function Unificado para menu_agenda",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Function Unificado para menu_agenda",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Function Unificado para menu_agenda",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Function Unificado para menu_agenda",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch - Cancelar Agendamiento Fecha": {
+      "main": [
+        [
+          {
+            "node": "Function - Preparar Cancelación",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Function - Validar Fecha",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Function - Preparar Cancelación": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send a text message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Function - Validar Fecha": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Function - Actualizar datos_parciales",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a text message4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Function - Actualizar datos_parciales": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Send a text message3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Function - Actualizar datos_parciales2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a text message6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet2": {
+      "main": [
+        [
+          {
+            "node": "Pedir Nombre",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch - Cancelar Agendamiento Hora": {
+      "main": [
+        [
+          {
+            "node": "Function - Preparar Cancelación Hora",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Function - Validar Hora",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet3": {
+      "main": [
+        [
+          {
+            "node": "Send a text message7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Function - Preparar Cancelación Hora": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Function - Validar Hora": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Function - Actualizar datos_parciales2": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Function - Menu Principal Unificado": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets - Actualizar Pantalla Menu Principal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets - Actualizar Pantalla Menu Principal": {
+      "main": [
+        [
+          {
+            "node": "Send a text message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message1": {
+      "main": [
+        [
+          {
+            "node": "Function - Preparar LOG Menu Principal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Function - Preparar LOG Menu Principal": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "2638ff4e-8557-4915-a3f3-384e96546b92",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "862c28ef7edda70537b7b5f50a8cc2d96ea301afdd4a670fcd93b523e42cdff7"
+  },
+  "id": "EPFMQtuQ4k5OTeDw",
+  "tags": []
+}
