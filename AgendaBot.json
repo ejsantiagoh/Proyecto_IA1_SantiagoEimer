@@ -1,5 +1,5 @@
 {
-  "name": "AgendaBot",
+  "name": "AgendaBot_Proyect",
   "nodes": [
     {
       "parameters": {
@@ -11,10 +11,10 @@
       "type": "n8n-nodes-base.telegramTrigger",
       "typeVersion": 1.2,
       "position": [
-        -4256,
-        -1328
+        1456,
+        1152
       ],
-      "id": "dd418270-d361-47df-a53c-85d14cc982bc",
+      "id": "da78c033-f6a2-417b-a74f-5718ca665093",
       "name": "Telegram Trigger",
       "webhookId": "74cf93a4-f585-4a96-8b85-3e2b629bd66e",
       "credentials": {
@@ -77,10 +77,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -4064,
-        -1328
+        1664,
+        1168
       ],
-      "id": "dea22ce6-6de8-4585-8191-065203362e08",
+      "id": "730b5cd2-62c5-4c45-9f78-1ce966af4812",
       "name": "Edit Fields"
     },
     {
@@ -247,6 +247,31 @@
                 },
                 "conditions": [
                   {
+                    "id": "7995faaa-4c7a-4a99-8519-eb5269387897",
+                    "leftValue": "={{ $json.pantalla_actual }}",
+                    "rightValue": "agendar_paso4_motivo",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "agendar_motivo"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
                     "id": "b3507465-5961-4df1-8050-afa6e63d78db",
                     "leftValue": "={{ $json.pantalla_actual }}",
                     "rightValue": "agendar_paso5_canal",
@@ -371,10 +396,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -3680,
-        -1488
+        2352,
+        1040
       ],
-      "id": "c2934a79-694c-4d10-b35f-5a378c13754f",
+      "id": "dae23769-33b9-4e60-9779-e140ac4fa52d",
       "name": "Switch"
     },
     {
@@ -388,10 +413,10 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -1824,
-        -2432
+        4208,
+        96
       ],
-      "id": "1e476297-4a18-4748-8e3e-a96938986bbd",
+      "id": "1846db28-f71f-4f67-8994-a1befdd3cce2",
       "name": "Telegram - Mensaje Bienvenida",
       "webhookId": "9f242aa9-64a1-4018-b54b-9785ded2508b",
       "credentials": {
@@ -497,10 +522,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -2112,
-        -2448
+        3920,
+        96
       ],
-      "id": "35cc6b6e-d387-42d9-9bac-8b9fc0374e43",
+      "id": "e1669275-b9ad-412d-b846-faffc7922333",
       "name": "Google Sheets - Crear Sesion",
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -516,10 +541,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -2432,
-        -2448
+        3600,
+        80
       ],
-      "id": "2fd30473-e7fc-4011-8cc0-a000941b275d",
+      "id": "6bb067ff-8e71-493a-a6e3-3e1b56881eae",
       "name": "Function - Preparar Sesion Nueva"
     },
     {
@@ -529,10 +554,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1600,
-        -2432
+        4432,
+        96
       ],
-      "id": "cddcb46f-0217-44b8-8d38-3f25db9458c8",
+      "id": "4707bbce-3384-4c38-b6a3-0d7db68bad8d",
       "name": "Function - Preparar LOG"
     },
     {
@@ -628,10 +653,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -1328,
-        -2416
+        4704,
+        112
       ],
-      "id": "4ac261ec-7f87-4601-98d9-06e9d51d953c",
+      "id": "843f2737-b9bc-4217-925d-358a41daf36b",
       "name": "Google Sheets - Registrar LOG",
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -660,7 +685,7 @@
           "values": [
             {
               "lookupColumn": "telegram_user",
-              "lookupValue": "={{ $json.user_id }}"
+              "lookupValue": "={{ $('Edit Fields').item.json.user_id }}"
             }
           ]
         },
@@ -669,10 +694,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -3872,
-        -1328
+        1872,
+        1168
       ],
-      "id": "ce9f33c6-3817-4dff-8883-5abd24220f38",
+      "id": "30af99a7-e174-4e0f-bf60-9a65fc8b918c",
       "name": "Obtener Sesión Actual",
       "alwaysOutputData": true,
       "credentials": {
@@ -696,8 +721,8 @@
                 },
                 "conditions": [
                   {
-                    "leftValue": "={{ $json.message_text }}",
-                    "rightValue": "0",
+                    "leftValue": "={{ $('Edit Fields').item.json.message_text }}",
+                    "rightValue": "\"0\"",
                     "operator": {
                       "type": "string",
                       "operation": "equals"
@@ -721,8 +746,8 @@
                 "conditions": [
                   {
                     "id": "709d9a08-f7ee-4776-8c5a-10ca1770e805",
-                    "leftValue": "={{ $json.message_text }}",
-                    "rightValue": "1",
+                    "leftValue": "={{ $('Edit Fields').item.json.message_text }}",
+                    "rightValue": "\"1\"",
                     "operator": {
                       "type": "string",
                       "operation": "equals",
@@ -746,8 +771,8 @@
                 "conditions": [
                   {
                     "id": "20a1ac94-51ec-4ad3-8ff7-2e1e4f57a428",
-                    "leftValue": "={{ $json.message_text }}",
-                    "rightValue": "2",
+                    "leftValue": "={{ $('Edit Fields').item.json.message_text }}",
+                    "rightValue": "\"2\"",
                     "operator": {
                       "type": "string",
                       "operation": "equals",
@@ -771,8 +796,8 @@
                 "conditions": [
                   {
                     "id": "dd398add-93d4-4ac6-ae94-3f9f601127db",
-                    "leftValue": "={{ $json.message_text }}",
-                    "rightValue": "3",
+                    "leftValue": "={{ $('Edit Fields').item.json.message_text }}",
+                    "rightValue": "\"3\"",
                     "operator": {
                       "type": "string",
                       "operation": "equals",
@@ -796,8 +821,8 @@
                 "conditions": [
                   {
                     "id": "23494c3b-4ab3-46ff-970e-c5b96d3acc86",
-                    "leftValue": "={{ $json.message_text }}",
-                    "rightValue": "4",
+                    "leftValue": "={{ $('Edit Fields').item.json.message_text }}",
+                    "rightValue": "\"4\"",
                     "operator": {
                       "type": "string",
                       "operation": "equals",
@@ -821,8 +846,8 @@
                 "conditions": [
                   {
                     "id": "d9f458db-5ed1-49b4-bd5a-79c2b340b482",
-                    "leftValue": "={{ $json.message_text }}",
-                    "rightValue": "5",
+                    "leftValue": "={{ $('Edit Fields').item.json.message_text }}",
+                    "rightValue": "\"5\"",
                     "operator": {
                       "type": "string",
                       "operation": "equals",
@@ -846,8 +871,8 @@
                 "conditions": [
                   {
                     "id": "ca5b1347-7b23-42cc-837c-06421ec9d320",
-                    "leftValue": "={{ $json.message_text }}",
-                    "rightValue": "6",
+                    "leftValue": "={{ $('Edit Fields').item.json.message_text }}",
+                    "rightValue": "\"6\"",
                     "operator": {
                       "type": "string",
                       "operation": "equals",
@@ -871,8 +896,8 @@
                 "conditions": [
                   {
                     "id": "d33c087e-3b8e-4106-9787-e57fd5403836",
-                    "leftValue": "={{ $json.message_text }}",
-                    "rightValue": "7",
+                    "leftValue": "={{ $('Edit Fields').item.json.message_text }}",
+                    "rightValue": "\"7\"",
                     "operator": {
                       "type": "string",
                       "operation": "equals",
@@ -896,8 +921,8 @@
                 "conditions": [
                   {
                     "id": "42014d87-5bae-46f9-8ecc-d9326b12c0e9",
-                    "leftValue": "={{ $json.message_text }}",
-                    "rightValue": "8",
+                    "leftValue": "={{ $('Edit Fields').item.json.message_text }}",
+                    "rightValue": "\"8\"",
                     "operator": {
                       "type": "string",
                       "operation": "equals",
@@ -919,10 +944,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -2256,
-        -2240
+        3776,
+        288
       ],
-      "id": "e6260b31-7be9-4854-abe5-6f3e35c73337",
+      "id": "fecbf332-1457-4730-b1ac-7aa1846c7a44",
       "name": "Switch - Opciones Menu Principal"
     },
     {
@@ -934,10 +959,10 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -1280,
-        -2176
+        4752,
+        352
       ],
-      "id": "43be3abd-9664-4067-9246-6448eb3e6599",
+      "id": "163740c8-8129-4386-96a4-9ad1253c37f4",
       "name": "Send a text message1",
       "webhookId": "a3607b63-5077-4bf9-a85e-5b2373263465",
       "credentials": {
@@ -1107,10 +1132,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -2176,
-        -1760
+        3856,
+        768
       ],
-      "id": "39ab4af9-609c-4c9d-afc5-3ca7aa3e7263",
+      "id": "e6ade01f-c3a4-41a1-bcc4-814d158eb286",
       "name": "Switch - Opciones Menu Agenda"
     },
     {
@@ -1120,10 +1145,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1776,
-        -1760
+        4256,
+        768
       ],
-      "id": "6f336612-0ba8-4622-99c6-5edcd3a7ac0d",
+      "id": "ac1568a0-17ed-41fe-a3e9-a5baa7251655",
       "name": "Function Unificado para menu_agenda"
     },
     {
@@ -1163,10 +1188,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -2144,
-        -1424
+        3888,
+        1104
       ],
-      "id": "38cc144c-7d8c-44e1-bfc2-9a32dce2deb5",
+      "id": "7d8b71fb-720a-4e51-b032-5c30a8ef5ed0",
       "name": "Switch - Cancelar Agendamiento Fecha"
     },
     {
@@ -1176,10 +1201,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1936,
-        -1520
+        4096,
+        1008
       ],
-      "id": "0922ae52-39e0-4ebe-81ec-6180a65e9a5b",
+      "id": "0eada0dd-8ed2-4021-b24d-7502a70baaff",
       "name": "Function - Preparar Cancelación"
     },
     {
@@ -1278,10 +1303,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -1728,
-        -1488
+        4304,
+        1040
       ],
-      "id": "ea523f98-ba24-4d52-ab75-eb301f4e5d9b",
+      "id": "90e408ba-ff0f-4ec4-862a-e61571c67068",
       "name": "Update row in sheet",
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -1299,10 +1324,10 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -1520,
-        -1568
+        4512,
+        960
       ],
-      "id": "eb0c7907-ff8e-42cf-8309-3e64f1124f85",
+      "id": "605dd8f6-46bc-4bc5-a2ff-c6399f576b62",
       "name": "Send a text message2",
       "webhookId": "38cc16e5-08b7-41b7-8965-c499256a54c7",
       "credentials": {
@@ -1319,10 +1344,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1952,
-        -1280
+        4080,
+        1248
       ],
-      "id": "4c638fa6-eeb5-412f-9f20-14629d910baa",
+      "id": "f7ff37df-91dd-4af7-9b41-c56b4a9c61a8",
       "name": "Function - Validar Fecha"
     },
     {
@@ -1353,10 +1378,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -1744,
-        -1280
+        4288,
+        1248
       ],
-      "id": "bb7c589d-7177-4102-ab5a-31278e31dca9",
+      "id": "cb79fd9f-4b4f-42f7-917b-89360d7b3d59",
       "name": "If"
     },
     {
@@ -1366,10 +1391,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1456,
-        -1376
+        4576,
+        1152
       ],
-      "id": "07923db5-71ee-425e-b419-f177ae99ede4",
+      "id": "32246c47-9fa1-4a7f-a000-b040f15e4251",
       "name": "Function - Actualizar datos_parciales"
     },
     {
@@ -1468,10 +1493,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -1248,
-        -1376
+        4784,
+        1152
       ],
-      "id": "9897bff2-1d77-43f1-9f75-0d4cef6fa8b0",
+      "id": "0a72bc31-432e-47b5-8739-4d2c645b276f",
       "name": "Update row in sheet1",
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -1489,10 +1514,10 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -1040,
-        -1376
+        4992,
+        1152
       ],
-      "id": "1c3a2e38-fb6d-4730-99cf-7c353ba3ecbb",
+      "id": "1164f418-b092-4d71-ba26-c4085b2cccd4",
       "name": "Send a text message3",
       "webhookId": "71bee8ab-f77d-4e8a-b1b0-50884e7f8311",
       "credentials": {
@@ -1511,10 +1536,10 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -1344,
-        -1184
+        4688,
+        1344
       ],
-      "id": "c2fa1b41-2311-46c8-8115-80768c47da08",
+      "id": "b70f342e-549c-4d6c-a536-aeb7d0aefc41",
       "name": "Send a text message4",
       "webhookId": "ad0ea58f-901d-4f52-816d-98502984be0b",
       "credentials": {
@@ -1552,10 +1577,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -1776,
-        -800
+        4256,
+        1728
       ],
-      "id": "1111de1b-150e-4d09-8042-eafc915cf9bb",
+      "id": "5b05cdcd-eac3-4394-9cb7-7c5f147c4448",
       "name": "If1"
     },
     {
@@ -1654,10 +1679,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -1280,
-        -896
+        4752,
+        1632
       ],
-      "id": "e63c459c-b79b-4438-9150-1d8f4872bb45",
+      "id": "205d619c-774c-4f91-b100-1583a15dd1d5",
       "name": "Update row in sheet2",
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -1675,10 +1700,10 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -1568,
-        -704
+        4464,
+        1824
       ],
-      "id": "580cb321-7189-451d-8457-3a6179af1a00",
+      "id": "65cee117-2aaf-44f6-b0fe-83fbad3e6619",
       "name": "Send a text message6",
       "webhookId": "ad0ea58f-901d-4f52-816d-98502984be0b",
       "credentials": {
@@ -1725,10 +1750,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -2176,
-        -944
+        3856,
+        1520
       ],
-      "id": "d59e434a-5ee9-43cf-8e06-940d3ed8422d",
+      "id": "4bea34f0-55c1-44fa-805d-1035b4e75cc0",
       "name": "Switch - Cancelar Agendamiento Hora"
     },
     {
@@ -1827,10 +1852,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -1728,
-        -1024
+        4304,
+        1440
       ],
-      "id": "cb110b14-7df9-46f9-a56b-8eedbedb0f60",
+      "id": "ca818024-6608-49e5-bc19-a6a10d30316f",
       "name": "Update row in sheet3",
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -1848,10 +1873,10 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -1536,
-        -1072
+        4512,
+        1472
       ],
-      "id": "6bf8f258-ad5b-4431-85dd-2c198dc59774",
+      "id": "905c3ffa-d829-443b-a4d1-733528f3dd6b",
       "name": "Send a text message7",
       "webhookId": "38cc16e5-08b7-41b7-8965-c499256a54c7",
       "credentials": {
@@ -1868,10 +1893,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1936,
-        -1008
+        4112,
+        1456
       ],
-      "id": "56daee36-6c64-41b1-8989-7e00fd9eaa01",
+      "id": "f6c779d6-5ed8-4fb7-a9a6-5766b8c06a1d",
       "name": "Function - Preparar Cancelación Hora"
     },
     {
@@ -1881,10 +1906,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1984,
-        -800
+        4048,
+        1728
       ],
-      "id": "bfd4a11f-3b42-4797-98b8-8705189c6f68",
+      "id": "4ce8d83c-a919-409a-8406-d6bc7195418b",
       "name": "Function - Validar Hora"
     },
     {
@@ -1894,10 +1919,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1488,
-        -896
+        4544,
+        1632
       ],
-      "id": "9651b89a-76f8-47c3-b49f-6ab041cb2f58",
+      "id": "7abe2e79-68e3-4ec6-8ebf-2782f00791d8",
       "name": "Function - Actualizar datos_parciales2"
     },
     {
@@ -1909,10 +1934,10 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -1072,
-        -896
+        4960,
+        1632
       ],
-      "id": "8fbad7d1-e806-494d-80cd-8a3d029f3fc1",
+      "id": "067e422d-dc59-4961-9560-d26d44ce9b91",
       "name": "Pedir Nombre",
       "webhookId": "71bee8ab-f77d-4e8a-b1b0-50884e7f8311",
       "credentials": {
@@ -1924,15 +1949,15 @@
     },
     {
       "parameters": {
-        "jsCode": "// Obtener el nombre de la salida del Switch Secundario\n// Esto nos dirá qué opción eligió el usuario\nconst inputNodeName = $input.first().json;\n\n// Extraer el número de la opción del message_text\nconst messageText = $('Edit Fields').item.json.message_text;\nconst userId = $('Edit Fields').item.json.user_id;\n\n// Mapeo de opciones a siguiente pantalla\nconst nextScreenMap = {\n  '0': 'menu_ayuda',\n  '1': 'menu_agenda',\n  '2': 'menu_tareas',\n  '3': 'menu_recordatorios',\n  '4': 'menu_habitos',\n  '5': 'menu_listas',\n  '6': 'menu_reportes',\n  '7': 'menu_configuracion',\n  '8': 'menu_administrador'\n};\n\n// Mapeo de opciones a mensajes\nconst messageMap = {\n  '0': `Aquí tienes información de ayuda:\n\n1. Escribe solo números para elegir opciones\n2. Usa 9 para volver al menú anterior\n3. Puedes cancelar en cualquier momento\n\n¿En qué más te puedo ayudar?\n\n9. Volver al menú principal`,\n\n  '1': `Perfecto, vamos con tu agenda.\n\n¿Qué deseas hacer?\n\n1. Agendar una nueva cita\n2. Consultar tu agenda\n3. Reprogramar una cita\n4. Cancelar una cita\n5. Marcar una cita como completada\n9. Volver al menú principal`,\n\n  '2': `Vamos con tus tareas.\n\n¿Qué deseas hacer?\n\n1. Crear nueva tarea\n2. Ver mis tareas\n3. Marcar tarea como completada\n4. Eliminar tarea\n9. Volver al menú principal`,\n\n  '3': `Vamos con tus recordatorios.\n\n¿Qué deseas hacer?\n\n1. Crear recordatorio\n2. Ver recordatorios\n3. Eliminar recordatorio\n9. Volver al menú principal`,\n\n  '4': `Vamos con tus hábitos.\n\n¿Qué deseas hacer?\n\n1. Crear nuevo hábito\n2. Ver mis hábitos\n3. Registrar cumplimiento\n4. Ver estadísticas\n9. Volver al menú principal`,\n\n  '5': `Vamos con tus listas.\n\n¿Qué deseas hacer?\n\n1. Crear nueva lista\n2. Ver mis listas\n3. Agregar items a lista\n4. Marcar items completados\n9. Volver al menú principal`,\n\n  '6': `Generando tu reporte...\n\nEsta función estará disponible pronto.\n\n9. Volver al menú principal`,\n\n  '7': `Configuración:\n\n1. Cambiar zona horaria\n2. Preferencias de notificaciones\n3. Ver mi información\n9. Volver al menú principal`,\n\n  '8': `Panel de Administrador:\n\n1. Ver todos los usuarios\n2. Ver estadísticas\n3. Exportar datos\n4. Gestionar permisos\n9. Volver al menú principal`\n};\n\n// Timestamp\nconst now = new Date();\nconst timestamp = now.toISOString().slice(0, 19).replace('T', ' ');\n\nreturn {\n  json: {\n    user_id: userId,\n    telegram_user: String(userId),\n    next_screen: nextScreenMap[messageText],\n    message: messageMap[messageText],\n    opcion_elegida: messageText,\n    timestamp: timestamp,\n    pantalla_origen: 'menu_principal'\n  }\n};"
+        "jsCode": "const messageText = $('Edit Fields').item.json.message_text;\nconst userId = $('Edit Fields').item.json.user_id;\n\n// Mapeo de opciones a siguiente pantalla\nconst nextScreenMap = {\n  '0': 'menu_ayuda',\n  '1': 'menu_agenda',\n  '2': 'menu_tareas',\n  '3': 'menu_recordatorios',\n  '4': 'menu_habitos',\n  '5': 'menu_listas',\n  '6': 'menu_reportes',\n  '7': 'menu_configuracion',\n  '8': 'menu_administrador'\n};\n\n// Mapeo de opciones a mensajes\nconst messageMap = {\n  '0': `Aquí tienes información de ayuda:\n\n1. Escribe solo números para elegir opciones\n2. Usa 9 para volver al menú anterior\n3. Puedes cancelar en cualquier momento\n\n¿En qué más te puedo ayudar?\n\n9. Volver al menú principal`,\n\n  '1': `Perfecto, vamos con tu agenda.\n\n¿Qué deseas hacer?\n\n1. Agendar una nueva cita\n2. Consultar tu agenda\n3. Reprogramar una cita\n4. Cancelar una cita\n5. Marcar una cita como completada\n9. Volver al menú principal`,\n\n  '2': `Vamos con tus tareas.\n\n¿Qué deseas hacer?\n\n1. Crear nueva tarea\n2. Ver mis tareas\n3. Marcar tarea como completada\n4. Eliminar tarea\n9. Volver al menú principal`,\n\n  '3': `Vamos con tus recordatorios.\n\n¿Qué deseas hacer?\n\n1. Crear recordatorio\n2. Ver recordatorios\n3. Eliminar recordatorio\n9. Volver al menú principal`,\n\n  '4': `Vamos con tus hábitos.\n\n¿Qué deseas hacer?\n\n1. Crear nuevo hábito\n2. Ver mis hábitos\n3. Registrar cumplimiento\n4. Ver estadísticas\n9. Volver al menú principal`,\n\n  '5': `Vamos con tus listas.\n\n¿Qué deseas hacer?\n\n1. Crear nueva lista\n2. Ver mis listas\n3. Agregar items a lista\n4. Marcar items completados\n9. Volver al menú principal`,\n\n  '6': `Generando tu reporte...\n\nEsta función estará disponible pronto.\n\n9. Volver al menú principal`,\n\n  '7': `Configuración:\n\n1. Cambiar zona horaria\n2. Preferencias de notificaciones\n3. Ver mi información\n9. Volver al menú principal`,\n\n  '8': `Panel de Administrador:\n\n1. Ver todos los usuarios\n2. Ver estadísticas\n3. Exportar datos\n4. Gestionar permisos\n9. Volver al menú principal`\n};\n\n// Timestamp\nconst now = new Date();\nconst timestamp = now.toISOString().slice(0, 19).replace('T', ' ');\n\nreturn {\n  json: {\n    user_id: userId,\n    telegram_user: String(userId),\n    next_screen: nextScreenMap[messageText],\n    message: messageMap[messageText],\n    opcion_elegida: messageText,\n    timestamp: timestamp,\n    pantalla_origen: 'menu_principal'\n  }\n};"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1808,
-        -2176
+        4224,
+        352
       ],
-      "id": "23f970a7-544f-4448-8898-5fe4c8bede10",
+      "id": "d66e2f96-3c37-49f5-9a3b-cea7e97f8e31",
       "name": "Function - Menu Principal Unificado"
     },
     {
@@ -2030,10 +2055,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -1504,
-        -2176
+        4528,
+        352
       ],
-      "id": "27fb81e9-1949-40b3-8b47-6521fddeb34e",
+      "id": "401c7622-77a4-4fb3-ba48-888690d23e46",
       "name": "Google Sheets - Actualizar Pantalla Menu Principal",
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -2049,10 +2074,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1072,
-        -2176
+        4960,
+        352
       ],
-      "id": "f9beb4e2-70d0-47be-a8c5-1c724b551637",
+      "id": "1730321e-8c00-4e50-94f3-d230fc097f9f",
       "name": "Function - Preparar LOG Menu Principal"
     },
     {
@@ -2131,10 +2156,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -864,
-        -2176
+        5168,
+        352
       ],
-      "id": "ac224082-0e5a-4962-a9ac-a1f42f1bceb3",
+      "id": "dcde3bf8-1eec-4a69-8865-e26ea002373b",
       "name": "Append row in sheet",
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -2154,10 +2179,10 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -1680,
-        -2000
+        4352,
+        528
       ],
-      "id": "81c2ee89-80de-4a21-98b7-fbe6a71706d0",
+      "id": "2f15d246-a56d-41b5-8c2d-8789f438c7ae",
       "name": "Telegram - Error Opcion Invalida Menu Principal",
       "webhookId": "75c446ca-e964-4b94-afa5-d5192ee7e5b7",
       "credentials": {
@@ -2166,6 +2191,966 @@
           "name": "Telegram account 3"
         }
       }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "9",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "4b888baf-2522-4d5b-b0b3-21a5730e705d"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "cancelar"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        2768,
+        1648
+      ],
+      "id": "5209270d-48ff-4db7-951b-c98682eb89c1",
+      "name": "Switch - Cancelar Agendamiento Motivo"
+    },
+    {
+      "parameters": {
+        "jsCode": "const userId = $('Edit Fields').item.json.user_id;\nconst now = new Date();\nconst timestamp = now.toISOString().slice(0, 19).replace('T', ' ');\n\nreturn {\n  json: {\n    user_id: userId,\n    telegram_user: String(userId),\n    next_screen: 'menu_agenda',\n    timestamp: timestamp\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3280,
+        1680
+      ],
+      "id": "a61f9a8e-e15f-402d-a619-f8cbf21d0bcc",
+      "name": "Function - Preparar Cancelación Motivo"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY",
+          "mode": "list",
+          "cachedResultName": "AgendaBot_DB",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "SESSIONS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r_V34zJLrvCQtdNAuYi2UJ_4Szykm7EOvg0H0t9P1uY/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "telegram_user": "={{ $('Edit Fields').item.json.chat_id }}"
+          },
+          "matchingColumns": [
+            "telegram_user"
+          ],
+          "schema": [
+            {
+              "id": "telegram_user",
+              "displayName": "telegram_user",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "pantalla_actual",
+              "displayName": "pantalla_actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "paso_actual",
+              "displayName": "paso_actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "datos_parciales",
+              "displayName": "datos_parciales",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "timestamp_ultima_interaccion",
+              "displayName": "timestamp_ultima_interaccion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        3456,
+        1712
+      ],
+      "id": "beba2ecd-d5b7-4acf-a518-c761feecd738",
+      "name": "Update row in sheet4",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "TCN74QRrnqoZq4pf",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Edit Fields').item.json.user_id }}",
+        "text": "=Agendamiento cancelado.  \n\nVolviendo al menú de Agenda...  \n¿Qué deseas hacer?  \n1. Agendar una nueva cita \n2. Consultar tu agenda \n3. Reprogramar una cita\n4. Cancelar una cita \n5. Marcar una cita como completada \n9. Volver al menú principal",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        3664,
+        1712
+      ],
+      "id": "78f0e4e3-a3bb-48b9-bd5a-b871007f30b5",
+      "name": "Send a text message",
+      "webhookId": "94c38f74-f1d3-4461-8c1a-a5c9bd52d63e",
+      "credentials": {
+        "telegramApi": {
+          "id": "owVHb8fG2ichaOEK",
+          "name": "Telegram account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const messageText = $('Edit Fields').item.json.message_text;\nconst userId = $('Edit Fields').item.json.user_id;\n\n// Validar que no esté vacío\nif (!messageText || messageText.trim() === '') {\n  return {\n    json: {\n      valid: false,\n      user_id: userId,\n      error_message: `Por favor describe el motivo de la cita.\n\n9. Cancelar`\n    }\n  };\n}\n\n// Validar longitud mínima\nif (messageText.trim().length < 3) {\n  return {\n    json: {\n      valid: false,\n      user_id: userId,\n      error_message: `El motivo debe tener al menos 3 caracteres.\n\n9. Cancelar`\n    }\n  };\n}\n\n// Validar longitud máxima\nif (messageText.trim().length > 200) {\n  return {\n    json: {\n      valid: false,\n      user_id: userId,\n      error_message: `El motivo es demasiado largo. Máximo 200 caracteres.\n\n9. Cancelar`\n    }\n  };\n}\n\n// Si es válido, continuar\nconst now = new Date();\nconst timestamp = now.toISOString().slice(0, 19).replace('T', ' ');\n\nconst datosParcialesStr = $('Obtener Sesión Actual').item.json.datos_parciales;\nlet datosParcialesObj = JSON.parse(datosParcialesStr);\n\ndatosParcialesObj.motivo = messageText.trim();\n\nreturn {\n  json: {\n    valid: true,\n    user_id: userId,\n    telegram_user: String(userId),\n    next_screen: 'agendar_paso5_canal',\n    datos_parciales: JSON.stringify(datosParcialesObj),\n    timestamp: timestamp\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3200,
+        1952
+      ],
+      "id": "cd674dd1-92d6-4175-9483-1cb0a3db0660",
+      "name": "Function - Validar Motivo"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "ded348af-aa4c-4f95-b2f4-06b9f45071e6",
+              "leftValue": "={{ $json.valid }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        3408,
+        1952
+      ],
+      "id": "d726e223-437d-4281-848a-0ffca1540b33",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "9",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "cancelar-nombre-001"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "cancelar"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        4160,
+        2528
+      ],
+      "id": "a61434f9-24db-4508-9f82-69b03529a12c",
+      "name": "Switch - Cancelar Agendamiento Nombre"
+    },
+    {
+      "parameters": {
+        "jsCode": "const userId = $('Edit Fields').item.json.user_id;\nconst now = new Date();\nconst timestamp = now.toISOString().slice(0, 19).replace('T', ' ');\n\nreturn {\n  json: {\n    user_id: userId,\n    telegram_user: String(userId),\n    next_screen: 'menu_agenda',\n    timestamp: timestamp\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4480,
+        2448
+      ],
+      "id": "84d0c183-3315-48ec-a71f-78c17cd4c6b2",
+      "name": "Function - Preparar Cancelación Nombre"
+    },
+    {
+      "parameters": {
+        "jsCode": "const messageText = $('Edit Fields').item.json.message_text;\nconst userId = $('Edit Fields').item.json.user_id;\n\n// Validar que no esté vacío\nif (!messageText || messageText.trim() === '') {\n  return {\n    json: {\n      valid: false,\n      user_id: userId,\n      error_message: `Por favor escribe un nombre válido.\\n\\n9. Cancelar`\n    }\n  };\n}\n\n// Validar longitud mínima\nif (messageText.trim().length < 3) {\n  return {\n    json: {\n      valid: false,\n      user_id: userId,\n      error_message: `El nombre debe tener al menos 3 caracteres.\\n\\n9. Cancelar`\n    }\n  };\n}\n\n// Validar longitud máxima\nif (messageText.trim().length > 100) {\n  return {\n    json: {\n      valid: false,\n      user_id: userId,\n      error_message: `El nombre es demasiado largo. Máximo 100 caracteres.\\n\\n9. Cancelar`\n    }\n  };\n}\n\n// Si es válido, continuar\nconst now = new Date();\nconst timestamp = now.toISOString().slice(0, 19).replace('T', ' ');\n\nconst datosParcialesStr = $('Obtener Sesión Actual').item.json.datos_parciales;\nlet datosParcialesObj = JSON.parse(datosParcialesStr);\n\ndatosParcialesObj.nombre = messageText.trim();\n\nreturn {\n  json: {\n    valid: true,\n    user_id: userId,\n    telegram_user: String(userId),\n    next_screen: 'agendar_paso4_motivo',\n    datos_parciales: JSON.stringify(datosParcialesObj),\n    timestamp: timestamp\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4480,
+        2608
+      ],
+      "id": "12a2c7bd-3b19-4034-8abb-0846f94ac41d",
+      "name": "Function - Validar Nombre"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "if-validar-nombre-001",
+              "leftValue": "={{ $json.valid }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "boolean",
+                "operation": "true"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        4800,
+        2608
+      ],
+      "id": "0a86fe82-2393-4ddd-a662-0c595fb56aac",
+      "name": "IF - Nombre Valido"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "AgendaBot_DB",
+          "mode": "list",
+          "cachedResultName": "AgendaBot_DB"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "SESSIONS",
+          "mode": "list",
+          "cachedResultName": "SESSIONS"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "cellFormat": "USER_ENTERED"
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        5040,
+        2528
+      ],
+      "id": "1b9937ce-8a30-4e75-bf05-8dc45da3cc10",
+      "name": "Google Sheets - Actualizar Paso 4 Motivo",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "TCN74QRrnqoZq4pf",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.user_id }}",
+        "text": "=Paso 4 de 6\nCuéntame brevemente el motivo de la cita.\n\nEjemplo: Asesoría técnica\n\n9. Cancelar",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        5280,
+        2528
+      ],
+      "id": "b6c1bae3-3d25-4e0c-96b8-8eda71fc5177",
+      "name": "Telegram - Pedir Motivo",
+      "webhookId": "baace9fe-5147-4726-9b85-4785ad9c572b",
+      "credentials": {
+        "telegramApi": {
+          "id": "owVHb8fG2ichaOEK",
+          "name": "Telegram account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.user_id }}",
+        "text": "={{ $json.error_message }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        5040,
+        2688
+      ],
+      "id": "e08e5089-df3d-4053-b4bd-0e39b3273527",
+      "name": "Telegram - Error Nombre",
+      "webhookId": "fa9e6c66-5edb-434a-8b14-425a68b7fe43",
+      "credentials": {
+        "telegramApi": {
+          "id": "owVHb8fG2ichaOEK",
+          "name": "Telegram account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "9",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "cancelar-canal-001"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "cancelar"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "1",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "canal-presencial-001"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "presencial"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "2",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "canal-virtual-001"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "virtual"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "3",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "canal-llamada-001"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "llamada"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        4160,
+        2928
+      ],
+      "id": "55ba8173-7b8f-4784-91f4-a8d5a9a22945",
+      "name": "Switch - Validar Canal"
+    },
+    {
+      "parameters": {
+        "jsCode": "const userId = $('Edit Fields').item.json.user_id;\nconst now = new Date();\nconst timestamp = now.toISOString().slice(0, 19).replace('T', ' ');\n\nreturn {\n  json: {\n    user_id: userId,\n    telegram_user: String(userId),\n    next_screen: 'menu_agenda',\n    timestamp: timestamp\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4480,
+        2848
+      ],
+      "id": "1bf7e155-fd10-40ab-b04a-a84e050d806a",
+      "name": "Function - Preparar Cancelación Canal"
+    },
+    {
+      "parameters": {
+        "jsCode": "const messageText = $('Edit Fields').item.json.message_text;\nconst userId = $('Edit Fields').item.json.user_id;\n\nconst canalMap = {\n  '1': 'Presencial',\n  '2': 'Virtual',\n  '3': 'Llamada'\n};\n\n// Obtener datos_parciales actuales\nconst datosParcialesStr = $('Obtener Sesión Actual').item.json.datos_parciales;\nconst datosParcialesObj = JSON.parse(datosParcialesStr);\n\n// Agregar el canal\ndatosParcialesObj.canal = canalMap[messageText];\n\nconst now = new Date();\nconst timestamp = now.toISOString().slice(0, 19).replace('T', ' ');\n\n// Construir mensaje de confirmación\nconst mensaje = `Revisa la información de tu cita:\n\nFecha: ${datosParcialesObj.fecha}\nHora: ${datosParcialesObj.hora}\nCliente: ${datosParcialesObj.nombre}\nMotivo: ${datosParcialesObj.motivo}\nCanal: ${datosParcialesObj.canal}\n\n¿Qué deseas hacer?\n1. Confirmar y guardar\n2. Editar información\n3. Cancelar`;\n\nreturn {\n  json: {\n    user_id: userId,\n    telegram_user: String(userId),\n    next_screen: 'agendar_paso6_confirmar',\n    datos_parciales: JSON.stringify(datosParcialesObj),\n    timestamp: timestamp,\n    message: mensaje\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4480,
+        3008
+      ],
+      "id": "aee15807-3ef4-40b9-80bf-3b07856516ee",
+      "name": "Function - Preparar Confirmación"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "AgendaBot_DB",
+          "mode": "list",
+          "cachedResultName": "AgendaBot_DB"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "SESSIONS",
+          "mode": "list",
+          "cachedResultName": "SESSIONS"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "pantalla_actual": "={{ $json.next_screen }}",
+            "paso_actual": "6",
+            "datos_parciales": "={{ $json.datos_parciales }}",
+            "timestamp_ultima_interaccion": "={{ $json.timestamp }}"
+          }
+        },
+        "options": {
+          "cellFormat": "USER_ENTERED"
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        4800,
+        3008
+      ],
+      "id": "755faaef-a0ae-4f07-88e4-562d747ff902",
+      "name": "Google Sheets - Actualizar Paso 6 Confirmar",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "TCN74QRrnqoZq4pf",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.user_id }}",
+        "text": "={{ $json.message }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        5040,
+        3008
+      ],
+      "id": "f71929de-8fdd-4677-8d4a-4b8e9adaf946",
+      "name": "Telegram - Mostrar Confirmación",
+      "webhookId": "cc283097-ec88-4e21-988a-27ef3b280fa7",
+      "credentials": {
+        "telegramApi": {
+          "id": "owVHb8fG2ichaOEK",
+          "name": "Telegram account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.user_id }}",
+        "text": "Opción inválida. Por favor elige 1, 2 o 3.\n\n1. Presencial\n2. Virtual\n3. Llamada\n9. Cancelar",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        4480,
+        3168
+      ],
+      "id": "e4a9a3e8-d0c0-4e9b-a322-6e2336f7d1d2",
+      "name": "Telegram - Error Canal",
+      "webhookId": "9e604487-5840-49d4-b133-3b6332aee30c",
+      "credentials": {
+        "telegramApi": {
+          "id": "owVHb8fG2ichaOEK",
+          "name": "Telegram account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "1",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "confirmar-001"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "confirmar"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "2",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "editar-001"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "editar"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message_text }}",
+                    "rightValue": "3",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "cancelar-confirmar-001"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "cancelar"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        4160,
+        3328
+      ],
+      "id": "dd9a9590-cf82-43b6-849a-a69421c78240",
+      "name": "Switch - Procesar Confirmación"
+    },
+    {
+      "parameters": {
+        "jsCode": "const datosParcialesStr = $('Obtener Sesión Actual').item.json.datos_parciales;\nconst datosParcialesObj = JSON.parse(datosParcialesStr);\nconst userId = $('Edit Fields').item.json.user_id;\n\n// Generar ID único para la cita\nconst timestamp = Date.now();\nconst idCita = `CITA-${timestamp.toString().slice(-6)}`;\n\n// Timestamp de creación\nconst now = new Date();\nconst timestampCreacion = now.toISOString().slice(0, 19).replace('T', ' ');\n\nreturn {\n  json: {\n    id_cita: idCita,\n    fecha: datosParcialesObj.fecha,\n    hora: datosParcialesObj.hora,\n    nombre: datosParcialesObj.nombre,\n    motivo: datosParcialesObj.motivo,\n    canal: datosParcialesObj.canal,\n    estado: 'agendada',\n    creado_por: String(userId),\n    timestamp_creacion: timestampCreacion,\n    user_id: userId,\n    telegram_user: String(userId)\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4480,
+        3248
+      ],
+      "id": "b3bc6d17-436d-4174-91ee-d57f2e9b95d2",
+      "name": "Function - Preparar Datos Cita"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "AgendaBot_DB",
+          "mode": "list",
+          "cachedResultName": "AgendaBot_DB"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "CITAS",
+          "mode": "list",
+          "cachedResultName": "CITAS"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        4800,
+        3248
+      ],
+      "id": "1be36540-3991-41bb-8498-752526abd2c8",
+      "name": "Google Sheets - Guardar Cita",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "TCN74QRrnqoZq4pf",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "AgendaBot_DB",
+          "mode": "list",
+          "cachedResultName": "AgendaBot_DB"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "SESSIONS",
+          "mode": "list",
+          "cachedResultName": "SESSIONS"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "pantalla_actual": "menu_agenda",
+            "paso_actual": "0",
+            "datos_parciales": "",
+            "timestamp_ultima_interaccion": "={{ $json.timestamp_creacion }}"
+          }
+        },
+        "options": {
+          "cellFormat": "USER_ENTERED"
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        5040,
+        3248
+      ],
+      "id": "a138b979-c3b8-4ba3-aac6-3c2458b4a797",
+      "name": "Google Sheets - Resetear Sesión",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "TCN74QRrnqoZq4pf",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.user_id }}",
+        "text": "¡Listo! Tu cita quedó agendada correctamente.\n\nID de la cita: {{ $json.id_cita }}\n\n¿Qué deseas hacer ahora?\n1. Volver a Agenda\n2. Ir al menú principal",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        5280,
+        3248
+      ],
+      "id": "c9fe33d8-76ea-4bf8-b165-f0a2ae1cc07c",
+      "name": "Telegram - Éxito Cita Guardada",
+      "webhookId": "33000105-a09c-471c-9932-490071abf355",
+      "credentials": {
+        "telegramApi": {
+          "id": "owVHb8fG2ichaOEK",
+          "name": "Telegram account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const userId = $('Edit Fields').item.json.user_id;\nconst now = new Date();\nconst timestamp = now.toISOString().slice(0, 19).replace('T', ' ');\n\nreturn {\n  json: {\n    user_id: userId,\n    telegram_user: String(userId),\n    next_screen: 'agendar_paso1_fecha',\n    timestamp: timestamp\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4480,
+        3408
+      ],
+      "id": "f624d4de-2190-4b9e-9d8d-c5d80a31aae8",
+      "name": "Function - Volver a Editar"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "AgendaBot_DB",
+          "mode": "list",
+          "cachedResultName": "AgendaBot_DB"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "SESSIONS",
+          "mode": "list",
+          "cachedResultName": "SESSIONS"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "pantalla_actual": "={{ $json.next_screen }}",
+            "paso_actual": "1",
+            "timestamp_ultima_interaccion": "={{ $json.timestamp }}"
+          }
+        },
+        "options": {
+          "cellFormat": "USER_ENTERED"
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        4800,
+        3408
+      ],
+      "id": "8db98101-4d32-45be-929d-62b138e85b51",
+      "name": "Google Sheets - Volver Paso 1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "TCN74QRrnqoZq4pf",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.user_id }}",
+        "text": "Volvamos al inicio.\n\nPaso 1 de 6\n¿Cuál es la fecha de la cita?\n\nFormato: YYYY-MM-DD\nEjemplo: 2026-02-20\n\n9. Cancelar",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        5040,
+        3408
+      ],
+      "id": "67c2d1f9-9349-41e8-b40a-4948bdc648ab",
+      "name": "Telegram - Reiniciar Agendamiento",
+      "webhookId": "dbcdd882-ee91-4222-9ede-9d00743c2bf3",
+      "credentials": {
+        "telegramApi": {
+          "id": "owVHb8fG2ichaOEK",
+          "name": "Telegram account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.user_id }}",
+        "text": "Opción inválida. Por favor elige 1, 2 o 3.\n\n1. Confirmar y guardar\n2. Editar información\n3. Cancelar",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        4480,
+        3568
+      ],
+      "id": "93397fd8-7496-448c-b8dc-0ebccb14eb05",
+      "name": "Telegram - Error Confirmación",
+      "webhookId": "6e11e2f8-3ce9-43d1-a9cb-aebb5e2656e5",
+      "credentials": {
+        "telegramApi": {
+          "id": "owVHb8fG2ichaOEK",
+          "name": "Telegram account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtener el mensaje del usuario\nconst messageText = $('Edit Fields').item.json.message_text;\nconst userId = $('Edit Fields').item.json.user_id;\nconst chatId = $('Edit Fields').item.json.chat_id;\nconst firstName = $('Edit Fields').item.json.first_name || \"Usuario\";\nconst username = $('Edit Fields').item.json.username || \"\";\n\n// Intentar obtener la sesión actual\nlet sessionData;\ntry {\n  sessionData = $('Obtener Sesión Actual').item.json;\n} catch (error) {\n  // Si no hay sesión, crear objeto vacío\n  sessionData = {};\n}\n\n// Determinar pantalla_actual\n// Si no hay sesión o está vacía, es nuevo usuario\nconst pantallaActual = sessionData.pantalla_actual || \"\";\nconst pasoActual = sessionData.paso_actual || \"0\";\nconst datosParciales = sessionData.datos_parciales || \"\";\n\n// Preparar objeto completo para el Switch\nreturn {\n  json: {\n    // Datos del mensaje\n    message_text: messageText,\n    user_id: userId,\n    chat_id: chatId,\n    first_name: firstName,\n    username: username,\n    \n    // Datos de la sesión (o vacíos si no existe)\n    pantalla_actual: pantallaActual,\n    paso_actual: pasoActual,\n    datos_parciales: datosParciales,\n    telegram_user: String(userId)\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2112,
+        1184
+      ],
+      "id": "956913cb-4a3b-41cb-a7d2-35587edd36c8",
+      "name": "Function - Preparar Datos Switch Principal"
     }
   ],
   "pinData": {
@@ -2243,6 +3228,34 @@
             "type": "main",
             "index": 0
           }
+        ],
+        [
+          {
+            "node": "Switch - Cancelar Agendamiento Nombre",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch - Cancelar Agendamiento Motivo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch - Validar Canal",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch - Procesar Confirmación",
+            "type": "main",
+            "index": 0
+          }
         ]
       ]
     },
@@ -2294,7 +3307,7 @@
       "main": [
         [
           {
-            "node": "Switch",
+            "node": "Function - Preparar Datos Switch Principal",
             "type": "main",
             "index": 0
           }
@@ -2646,6 +3659,296 @@
           }
         ]
       ]
+    },
+    "Switch - Cancelar Agendamiento Motivo": {
+      "main": [
+        [
+          {
+            "node": "Function - Preparar Cancelación Motivo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Function - Validar Motivo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Function - Preparar Cancelación Motivo": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet4": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Function - Validar Motivo": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch - Cancelar Agendamiento Nombre": {
+      "main": [
+        [
+          {
+            "node": "Function - Preparar Cancelación Nombre",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Function - Validar Nombre",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Function - Preparar Cancelación Nombre": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Function - Validar Nombre": {
+      "main": [
+        [
+          {
+            "node": "IF - Nombre Valido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF - Nombre Valido": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets - Actualizar Paso 4 Motivo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Telegram - Error Nombre",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets - Actualizar Paso 4 Motivo": {
+      "main": [
+        [
+          {
+            "node": "Telegram - Pedir Motivo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch - Validar Canal": {
+      "main": [
+        [
+          {
+            "node": "Function - Preparar Cancelación Canal",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Function - Preparar Confirmación",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Function - Preparar Confirmación",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Function - Preparar Confirmación",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Telegram - Error Canal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Function - Preparar Cancelación Canal": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Function - Preparar Confirmación": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets - Actualizar Paso 6 Confirmar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets - Actualizar Paso 6 Confirmar": {
+      "main": [
+        [
+          {
+            "node": "Telegram - Mostrar Confirmación",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch - Procesar Confirmación": {
+      "main": [
+        [
+          {
+            "node": "Function - Preparar Datos Cita",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Function - Volver a Editar",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Function - Preparar Cancelación Canal",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Telegram - Error Confirmación",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Function - Preparar Datos Cita": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets - Guardar Cita",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets - Guardar Cita": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets - Resetear Sesión",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets - Resetear Sesión": {
+      "main": [
+        [
+          {
+            "node": "Telegram - Éxito Cita Guardada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Function - Volver a Editar": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets - Volver Paso 1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets - Volver Paso 1": {
+      "main": [
+        [
+          {
+            "node": "Telegram - Reiniciar Agendamiento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Function - Preparar Datos Switch Principal": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
@@ -2653,11 +3956,11 @@
     "executionOrder": "v1",
     "availableInMCP": false
   },
-  "versionId": "2638ff4e-8557-4915-a3f3-384e96546b92",
+  "versionId": "820f4de3-d991-420f-bf9f-7c36f4ee3b73",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "862c28ef7edda70537b7b5f50a8cc2d96ea301afdd4a670fcd93b523e42cdff7"
   },
-  "id": "EPFMQtuQ4k5OTeDw",
+  "id": "DPqTF7_rgJ91qKyxO2JRm",
   "tags": []
 }
